@@ -1,10 +1,10 @@
 //SPDX-License-Identifier: MIT
 
-pragma solidity 0.8.19; 
+pragma solidity 0.8.18; 
 
     contract SimpleStorage{     
 
-     // Basic Types: boolean , unit ->unsigned integer(Positive whole no.), int (either +ve or _ve),address , bytes
+     // Basic Types: boolean , unit ->unsigned integer(Positive whole no.), int (either +ve or -ve any),address , bytes
         //int and int256 are same because int has 256 in default
         //uint favouriteNumber = 12;
         // bool hasFavouriteNumber = true;
@@ -17,17 +17,18 @@ pragma solidity 0.8.19;
 
         uint public myfavouriteNumber = 12;   //  myfavouriteNumber <---- is implicitly a storage variable
 
-         
-         function Store(uint256 _favouriteNo) public {
-             myfavouriteNumber = _favouriteNo;
+                                                       // virtual means we can override function
+         function store(uint256 _favouriteNumber) public virtual  {
+             myfavouriteNumber = _favouriteNumber;  // + 5
          }
       
          
        
        // view , pure  these functions only consumes gas when calling into another function , here in this , they are not consuming any gas
+
        // string is an array of bytes so it needs memory or calldata keyword
 
-       function retrive() public view returns(uint256){
+       function retrieve() public view returns(uint256){
               return myfavouriteNumber;
           }
        
@@ -61,8 +62,8 @@ pragma solidity 0.8.19;
       //memory , calldata ,storage 
 
      // calldata  is a temporary veriable that can not modified
-     // memmory is a temporary variable thaat can be modified
-     //stoage is a permanent variable thaat can be modified
+     // memmory is a temporary variable that can be modified
+     //stoage is a permanent variable that can be modified
 
       function addPerson(string memory _name, uint256 _favoriteNumber) public {
           listOfPeople.push(Person(_favoriteNumber, _name));
@@ -73,12 +74,6 @@ pragma solidity 0.8.19;
 
        //Mapping
           mapping(string=>uint256) public nametoFavoriteNum;
-
-
-       
-
-
-
 
 
 
